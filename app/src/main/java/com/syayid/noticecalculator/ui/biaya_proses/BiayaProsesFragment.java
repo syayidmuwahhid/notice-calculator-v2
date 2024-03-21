@@ -1,4 +1,4 @@
-package com.syayid.noticecalculator.ui.slideshow;
+package com.syayid.noticecalculator.ui.biaya_proses;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.syayid.noticecalculator.databinding.FragmentSlideshowBinding;
+import com.syayid.noticecalculator.databinding.FragmentBiayaProsesBinding;
 
-public class SlideshowFragment extends Fragment {
+public class BiayaProsesFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentBiayaProsesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentBiayaProsesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -5,17 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.syayid.noticecalculator.R;
 import com.syayid.noticecalculator.database.DBHandler;
 import com.syayid.noticecalculator.database.UserHandler;
 import com.syayid.noticecalculator.databinding.FragmentHomeBinding;
-
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -23,15 +24,39 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+//        HomeViewModel homeViewModel =
+//                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         Context context = root.getContext();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        TextView textView = binding.textHome;
+        textView.setText("OKKKK");
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        Button btn = binding.btnGallery;
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                // Membuat instance dari Fragment tujuan
+//                GalleryFragment galleryFragment = new GalleryFragment();
+//
+//                // Memulai transaksi Fragment
+//                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+//
+//                // Mengganti Fragment yang sedang ditampilkan dengan Fragment tujuan
+//                transaction.replace(R.id.nav_host_fragment_content_main, galleryFragment);
+//
+//                // Menambahkan transaksi ke back stack
+//                transaction.addToBackStack(null);
+//
+//                // Melakukan commit transaksi
+//                transaction.commit();
+//                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+//                navController.navigate(R.id.nav_gallery);
+            }
+        });
 
         // Create sample data
 //        Users new_user = new Users();

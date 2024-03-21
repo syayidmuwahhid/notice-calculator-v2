@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.syayid.noticecalculator.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_notice"
+        android:name="com.syayid.noticecalculator.ui.notice.NoticeFragment"
+        android:label="@string/menu_notice"
+        tools:layout="@layout/fragment_notice" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.syayid.noticecalculator.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_biaya_proses"
+        android:name="com.syayid.noticecalculator.ui.biaya_proses.BiayaProsesFragment"
+        android:label="@string/menu_biaya_proses"
+        tools:layout="@layout/fragment_biaya_proses" />
 </navigation>

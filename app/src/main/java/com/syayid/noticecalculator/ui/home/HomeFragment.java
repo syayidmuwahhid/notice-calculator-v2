@@ -31,30 +31,12 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         Context context = root.getContext();
 
-        TextView textView = binding.textHome;
-        textView.setText("OKKKK");
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        Button btn = binding.btnGallery;
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btn_notice = binding.btnHitung;
+        Button btn_progresif = binding.btnProgresif;
+        btn_notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                // Membuat instance dari Fragment tujuan
-//                GalleryFragment galleryFragment = new GalleryFragment();
-//
-//                // Memulai transaksi Fragment
-//                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//
-//                // Mengganti Fragment yang sedang ditampilkan dengan Fragment tujuan
-//                transaction.replace(R.id.nav_host_fragment_content_main, galleryFragment);
-//
-//                // Menambahkan transaksi ke back stack
-//                transaction.addToBackStack(null);
-//
-//                // Melakukan commit transaksi
-//                transaction.commit();
-//                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
-//                navController.navigate(R.id.nav_gallery);
+
             }
         });
 

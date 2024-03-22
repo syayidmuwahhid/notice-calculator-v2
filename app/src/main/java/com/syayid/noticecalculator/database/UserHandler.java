@@ -118,6 +118,19 @@ public class UserHandler extends DBHandler<Users>{
     }
 
     @Override
+    public int update(Users user, String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER_NAME, user.getName());
+        values.put(KEY_USER_PASSWORD, user.getPassword());
+        values.put(KEY_USER_LEVEL, user.getLevel());
+
+        // Syntax UPDATE <table_name> SET column1 = value1, column2 = value2, ... WHERE condition;
+        return db.update(TABLE_USERS, values, KEY_USER_ID + " = ?", new String[] { id });
+    }
+
+    @Override
     public void empty() {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();

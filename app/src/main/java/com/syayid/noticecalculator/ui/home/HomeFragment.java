@@ -17,6 +17,9 @@ import com.syayid.noticecalculator.R;
 import com.syayid.noticecalculator.database.DBHandler;
 import com.syayid.noticecalculator.database.UserHandler;
 import com.syayid.noticecalculator.databinding.FragmentHomeBinding;
+import com.syayid.noticecalculator.models.Users;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -39,23 +42,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        // Create sample data
-//        Users new_user = new Users();
-//        new_user.setName("SYAYID");
-//        new_user.setPassword("123");
-//        new_user.setLevel(0);
-        // Add sample post to the database
-//        dbHandler.add(new_user);
-
-        // Get singleton instance of database
-        DBHandler userHandler = UserHandler.getInstance(context);
-
-        // Get all posts from database
-//        List<Users> user_data = userHandler.getDatas();
-//        for (Users user : user_data) {
-//            System.out.println(user);
-//        }
 
         return root;
     }

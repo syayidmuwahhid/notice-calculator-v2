@@ -1,6 +1,7 @@
 package com.syayid.noticecalculator;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
@@ -14,7 +15,10 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.syayid.noticecalculator.database.DBHandler;
+import com.syayid.noticecalculator.database.UserHandler;
 import com.syayid.noticecalculator.databinding.ActivityMainBinding;
+import com.syayid.noticecalculator.models.Users;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +51,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        DBHandler userHandler = UserHandler.getInstance(this);
+        try {
+            Users user = (Users) userHandler.getData("1");
+        } catch (Exception e) {
+            if (e.getMessage().equalsIgnoreCase("Index 0 requested, with a size of 0")) {
+                Users new_user = new Users();
+                new_user.setId(1);
+                new_user.setName("admin");
+                new_user.setPassword("123456");
+                new_user.setLevel(0);
+                userHandler.add(new_user);
+            }
+            Log.e("Get Data User", e.getMessage());
+        }
     }
 
 //    @Override

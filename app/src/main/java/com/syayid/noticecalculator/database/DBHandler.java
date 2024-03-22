@@ -89,10 +89,8 @@ abstract public class DBHandler<T> extends SQLiteOpenHelper {
     abstract public List<T> getDatas();
     abstract public T getData(String id);
     abstract public int update(T model);
-
+    abstract public int update(T model, String id);
     abstract public void empty();
-
     abstract public void delete(String id);
-
     abstract public void delete(T model);
 }

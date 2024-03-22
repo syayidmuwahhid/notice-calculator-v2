@@ -118,6 +118,19 @@ public class NoticeHandler extends DBHandler<Notices>{
     }
 
     @Override
+    public int update(Notices notices, String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NOTICE_TIPE, notices.getTipe());
+        values.put(KEY_NOTICE_HARGA, notices.getHarga());
+        values.put(KEY_NOTICE_PROGRESIF, notices.getProgresif());
+
+        // Syntax UPDATE <table_name> SET column1 = value1, column2 = value2, ... WHERE condition;
+        return db.update(TABLE_NOTICES, values, KEY_NOTICE_TIPE + " = ?", new String[] { id });
+    }
+
+    @Override
     public void empty() {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();

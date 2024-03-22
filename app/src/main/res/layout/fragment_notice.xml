@@ -35,47 +35,11 @@
             android:id="@+id/tabelkontainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="Tipe" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="50dp"
-                    android:text="Notice" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="Progresif" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="50dp"
-                    android:text="Edit" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="Hapus" />
-            </TableRow>
-
         </TableLayout>
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_tambah_notice"
         android:layout_width="288dp"
         android:layout_height="wrap_content"
         android:text="Tambah Data"

@@ -116,6 +116,18 @@ public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
     }
 
     @Override
+    public int update(ProsesPrices prosesPrices, String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_PROSES_WILAYAH, prosesPrices.getWilayah());
+        values.put(KEY_PROSES_HARGA, prosesPrices.getHarga());
+
+        // Syntax UPDATE <table_name> SET column1 = value1, column2 = value2, ... WHERE condition;
+        return db.update(TABLE_BIAYA_PROSES, values, KEY_PROSES_ID + " = ?", new String[] { id });
+    }
+
+    @Override
     public void empty() {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();

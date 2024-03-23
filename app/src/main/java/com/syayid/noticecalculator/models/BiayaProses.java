@@ -1,14 +1,14 @@
 package com.syayid.noticecalculator.models;
 
-public class ProsesPrices {
+public class BiayaProses {
     private int id;
     private String wilayah;
     private double harga;
 
-    public ProsesPrices() {
+    public BiayaProses() {
     }
 
-    public ProsesPrices(int id, String wilayah, double harga) {
+    public BiayaProses(int id, String wilayah, double harga) {
         this.id = id;
         this.wilayah = wilayah;
         this.harga = harga;

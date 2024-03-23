@@ -7,16 +7,55 @@
     tools:context=".ui.biaya_proses.BiayaProsesFragment">
 
     <TextView
-        android:id="@+id/text_slideshow"
+        android:id="@+id/text_proses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="40dp"
+        android:text="DAFTAR BIAYA PROSES"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/tabelKontainerHz"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="30dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Konten Notice"
+        app:layout_constraintBottom_toTopOf="@id/btn_tambah_proses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_proses">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/tabelkontainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/primary">
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_tambah_proses"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:text="Tambah Data"
+        android:textColor="@color/black"
+        android:layout_marginVertical="30dp"
+        android:backgroundTint="@color/green_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

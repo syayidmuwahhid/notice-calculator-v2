@@ -6,30 +6,30 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.syayid.noticecalculator.models.ProsesPrices;
+import com.syayid.noticecalculator.models.BiayaProses;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
-    protected static ProsesPriceHandler sInstance;
+public class BiayaProsesHandler extends DBHandler<BiayaProses>{
+    protected static BiayaProsesHandler sInstance;
 
-    public ProsesPriceHandler(Context context) {
+    public BiayaProsesHandler(Context context) {
         super(context);
     }
 
-    public static synchronized ProsesPriceHandler getInstance(Context context) {
+    public static synchronized BiayaProsesHandler getInstance(Context context) {
         // Use the application context, which will ensure that you
         // don't accidentally leak an Activity's context.
         // See this article for more information: http://bit.ly/6LRzfx
         if (sInstance == null) {
-            sInstance = new ProsesPriceHandler(context.getApplicationContext());
+            sInstance = new BiayaProsesHandler(context.getApplicationContext());
         }
         return sInstance;
     }
 
     @Override
-    public void add(ProsesPrices prosesPrices) {
+    public void add(BiayaProses biayaProses) {
         // Create and/or open the database for writing
         SQLiteDatabase db = getWritableDatabase();
 
@@ -38,8 +38,8 @@ public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(KEY_PROSES_WILAYAH, prosesPrices.getWilayah());
-            values.put(KEY_PROSES_HARGA, prosesPrices.getHarga());
+            values.put(KEY_PROSES_WILAYAH, biayaProses.getWilayah());
+            values.put(KEY_PROSES_HARGA, biayaProses.getHarga());
 
             // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
             db.insertOrThrow(TABLE_BIAYA_PROSES, null, values);
@@ -53,10 +53,10 @@ public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
 
     @Override
     // Get all posts in the database
-    public List<ProsesPrices> getDatas() {
-        List<ProsesPrices> prosesPrices = new ArrayList<>();
+    public List<BiayaProses> getDatas() {
+        List<BiayaProses> biayaProsesPrices = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_BIAYA_PROSES;
+        String selectQuery = "SELECT  * FROM " + TABLE_BIAYA_PROSES + " ORDER BY " + KEY_PROSES_WILAYAH + " ASC";
 
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
@@ -65,7 +65,7 @@ public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
         try {
             if (cursor.moveToFirst()) {
                 do {
-                    prosesPrices.add(new ProsesPrices(
+                    biayaProsesPrices.add(new BiayaProses(
                             Integer.parseInt(cursor.getString(0)),
                             cursor.getString(1),
                             Double.parseDouble(cursor.getString(2))
@@ -79,49 +79,74 @@ public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
                 cursor.close();
             }
         }
-        return prosesPrices;
+        return biayaProsesPrices;
     }
 
     //GET 1 data
     @Override
-    public ProsesPrices getData(String id) {
+    public BiayaProses getData(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_BIAYA_PROSES, new String[] { KEY_PROSES_ID,
                         KEY_PROSES_WILAYAH, KEY_PROSES_HARGA }, KEY_PROSES_ID + "=?",
                 new String[] { id }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
 
-        ProsesPrices prosesPrices = new ProsesPrices(
-                Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1),
-                Double.parseDouble(cursor.getString(2))
-        );
+        if (cursor != null && cursor.moveToFirst()) {
+            BiayaProses biayaProses = new BiayaProses(
+                    Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    Double.parseDouble(cursor.getString(2))
+            );
+            cursor.close(); // Jangan lupa untuk menutup Cursor setelah selesai digunakan
+            return biayaProses;
+        } else {
+            // Jika tidak ada data yang ditemukan, kembalikan nilai null atau objek Notices kosong
+            return new BiayaProses(); // Atau sesuaikan dengan definisi konstruktor Notices Anda
+        }
+    }
 
-        return prosesPrices;
+    @Override
+    public BiayaProses getData(String key, String text) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_BIAYA_PROSES, new String[] { KEY_PROSES_ID,
+                        KEY_PROSES_WILAYAH, KEY_PROSES_HARGA }, key + "=?",
+                new String[] { text }, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            BiayaProses biayaProses = new BiayaProses(
+                    Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    Double.parseDouble(cursor.getString(2))
+            );
+            cursor.close(); // Jangan lupa untuk menutup Cursor setelah selesai digunakan
+            return biayaProses;
+        } else {
+            // Jika tidak ada data yang ditemukan, kembalikan nilai null atau objek Notices kosong
+            return new BiayaProses(); // Atau sesuaikan dengan definisi konstruktor Notices Anda
+        }
     }
 
     // Update
     @Override
-    public int update(ProsesPrices prosesPrices) {
+    public int update(BiayaProses biayaProses) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_PROSES_WILAYAH, prosesPrices.getWilayah());
-        values.put(KEY_PROSES_HARGA, prosesPrices.getHarga());
+        values.put(KEY_PROSES_WILAYAH, biayaProses.getWilayah());
+        values.put(KEY_PROSES_HARGA, biayaProses.getHarga());
 
         // Syntax UPDATE <table_name> SET column1 = value1, column2 = value2, ... WHERE condition;
-        return db.update(TABLE_BIAYA_PROSES, values, KEY_PROSES_ID + " = ?", new String[] { String.valueOf(prosesPrices.getId()) });
+        return db.update(TABLE_BIAYA_PROSES, values, KEY_PROSES_ID + " = ?", new String[] { String.valueOf(biayaProses.getId()) });
     }
 
     @Override
-    public int update(ProsesPrices prosesPrices, String id) {
+    public int update(BiayaProses biayaProses, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_PROSES_WILAYAH, prosesPrices.getWilayah());
-        values.put(KEY_PROSES_HARGA, prosesPrices.getHarga());
+        values.put(KEY_PROSES_WILAYAH, biayaProses.getWilayah());
+        values.put(KEY_PROSES_HARGA, biayaProses.getHarga());
 
         // Syntax UPDATE <table_name> SET column1 = value1, column2 = value2, ... WHERE condition;
         return db.update(TABLE_BIAYA_PROSES, values, KEY_PROSES_ID + " = ?", new String[] { id });
@@ -151,10 +176,10 @@ public class ProsesPriceHandler extends DBHandler<ProsesPrices>{
     }
 
     @Override
-    public void delete(ProsesPrices prosesPrices) {
+    public void delete(BiayaProses biayaProses) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_BIAYA_PROSES, KEY_PROSES_ID + " = ?",
-                new String[] { String.valueOf(prosesPrices.getId()) });
+                new String[] { String.valueOf(biayaProses.getId()) });
         db.close();
     }
 }

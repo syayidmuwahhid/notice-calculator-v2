@@ -57,7 +57,7 @@ public class NoticeHandler extends DBHandler<Notices>{
     public List<Notices> getDatas() {
         List<Notices> notices = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_NOTICES;
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTICES + " ORDER BY " + KEY_NOTICE_TIPE + " ASC";
 
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
@@ -91,16 +91,41 @@ public class NoticeHandler extends DBHandler<Notices>{
         Cursor cursor = db.query(TABLE_NOTICES, new String[] { KEY_NOTICE_TIPE,
                         KEY_NOTICE_HARGA, KEY_NOTICE_PROGRESIF }, KEY_NOTICE_TIPE + "=?",
                 new String[] { id }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
 
-        Notices notices = new Notices(
-                cursor.getString(0),
-                Double.parseDouble(cursor.getString(1)),
-                Double.parseDouble(cursor.getString(2))
-        );
+        if (cursor != null && cursor.moveToFirst()) {
+            Notices notices = new Notices(
+                    cursor.getString(0),
+                    Double.parseDouble(cursor.getString(1)),
+                    Double.parseDouble(cursor.getString(2))
+            );
+            cursor.close(); // Jangan lupa untuk menutup Cursor setelah selesai digunakan
+            return notices;
+        } else {
+            // Jika tidak ada data yang ditemukan, kembalikan nilai null atau objek Notices kosong
+            return new Notices(); // Atau sesuaikan dengan definisi konstruktor Notices Anda
+        }
+    }
 
-        return notices;
+    @Override
+    public Notices getData(String key, String text) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NOTICES, new String[] { KEY_NOTICE_TIPE,
+                        KEY_NOTICE_HARGA, KEY_NOTICE_PROGRESIF }, key + "=?",
+                new String[] { text }, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Notices notices = new Notices(
+                    cursor.getString(0),
+                    Double.parseDouble(cursor.getString(1)),
+                    Double.parseDouble(cursor.getString(2))
+            );
+            cursor.close(); // Jangan lupa untuk menutup Cursor setelah selesai digunakan
+            return notices;
+        } else {
+            // Jika tidak ada data yang ditemukan, kembalikan nilai null atau objek Notices kosong
+            return new Notices(); // Atau sesuaikan dengan definisi konstruktor Notices Anda
+        }
     }
 
     // Update

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.syayid.noticecalculator.models.Notices;
 import com.syayid.noticecalculator.models.Users;
 
 import java.util.ArrayList;
@@ -92,15 +93,39 @@ public class UserHandler extends DBHandler<Users>{
         Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_USER_ID,
                         KEY_USER_NAME, KEY_USER_PASSWORD, KEY_USER_LEVEL }, KEY_USER_ID + "=?",
                 new String[] { id }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
 
-        Users user = new Users(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1),
-                cursor.getString(2),
-                Integer.parseInt(cursor.getString(3)));
+        if (cursor != null && cursor.moveToFirst()) {
+            Users user = new Users(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    Integer.parseInt(cursor.getString(3)));
+            cursor.close(); // Jangan lupa untuk menutup Cursor setelah selesai digunakan
+            return user;
+        } else {
+            // Jika tidak ada data yang ditemukan, kembalikan nilai null atau objek Notices kosong
+            return new Users(); // Atau sesuaikan dengan definisi konstruktor Notices Anda
+        }
+    }
 
-        return user;
+    @Override
+    public Users getData(String key, String text) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_USER_ID,
+                        KEY_USER_NAME, KEY_USER_PASSWORD, KEY_USER_LEVEL }, key + "=?",
+                new String[] { text }, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Users user = new Users(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    Integer.parseInt(cursor.getString(3)));
+            cursor.close(); // Jangan lupa untuk menutup Cursor setelah selesai digunakan
+            return user;
+        } else {
+            // Jika tidak ada data yang ditemukan, kembalikan nilai null atau objek Notices kosong
+            return new Users(); // Atau sesuaikan dengan definisi konstruktor Notices Anda
+        }
     }
 
     // Update the user's profile picture url

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.syayid.noticecalculator.database.DBHandler;
 import com.syayid.noticecalculator.database.NoticeHandler;
+import com.syayid.noticecalculator.models.BiayaProses;
 import com.syayid.noticecalculator.models.Notices;
 import com.syayid.noticecalculator.tools.FormatRp;
 
@@ -74,8 +75,7 @@ public class FormNoticeActivity extends AppCompatActivity {
             Notices notices = (Notices) noticeHandler.getData(getIntent().getStringExtra("update"));
             if (!edTipe.getText().toString().equalsIgnoreCase(getIntent().getStringExtra("update"))) {
                 if (notices.getTipe().equalsIgnoreCase(edTipe.getText().toString())) {
-                    Toast.makeText(context, "Tipe Sudah Ada!", Toast.LENGTH_LONG).show();
-                    return false;
+                    throw new Exception("Tipe Sudah Ada!");
                 }
             }
 
@@ -84,41 +84,34 @@ public class FormNoticeActivity extends AppCompatActivity {
             update_notice.setTipe(edTipe.getText().toString());
             update_notice.setHarga(Double.parseDouble(edNotice.getText().toString()));
             update_notice.setProgresif(Double.parseDouble(edProgresif.getText().toString()));
-            Toast.makeText(context, getIntent().getStringExtra("update"), Toast.LENGTH_LONG).show();
             noticeHandler.update(update_notice, getIntent().getStringExtra("update"));
-            return true;
 
         } catch (Exception e) {
-           Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             return false;
         }
+        return true;
     }
 
     private void submitNotice() {
         try {
             Notices notices = (Notices) noticeHandler.getData(edTipe.getText().toString());
-            if (notices.getTipe().equalsIgnoreCase(edTipe.getText().toString())) {
+            if (notices.getTipe() != null) {
                 Toast.makeText(context, "Tipe Sudah Ada!", Toast.LENGTH_LONG).show();
-            }
 
-        } catch (Exception e) {
-            if (e.getMessage().equalsIgnoreCase("Index 0 requested, with a size of 0")) {
+            } else {
                 Notices new_notice = new Notices();
                 new_notice.setTipe(edTipe.getText().toString());
                 new_notice.setHarga(Double.parseDouble(edNotice.getText().toString()));
                 new_notice.setProgresif(Double.parseDouble(edProgresif.getText().toString()));
 
-                try {
-                    noticeHandler.add(new_notice);
-                    Toast.makeText(context, "Berhasil Menambah Notice, Silakan Refresh Halaman", Toast.LENGTH_LONG).show();
-                    finish();
-                } catch (Exception er) {
-                    Toast.makeText(context, er.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            } else {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                noticeHandler.add(new_notice);
+                Toast.makeText(context, "Berhasil Menambah Notice", Toast.LENGTH_LONG).show();
+                finish();
             }
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

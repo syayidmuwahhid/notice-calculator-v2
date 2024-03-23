@@ -85,6 +85,37 @@ public class UserHandler extends DBHandler<Users>{
         return users;
     }
 
+    @Override
+    public List<Users> getDatas(String key, String value) {
+        List<Users> users = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE " + key + " = '" + value + "' ";
+
+        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
+        // disk space scenarios)
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    users.add(new Users(
+                            Integer.parseInt(cursor.getString(0)),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            Integer.parseInt(cursor.getString(3))
+                    ));
+                } while(cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("TAG", "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return users;
+    }
+
     //GET 1 data
     @Override
     public Users getData(String id) {

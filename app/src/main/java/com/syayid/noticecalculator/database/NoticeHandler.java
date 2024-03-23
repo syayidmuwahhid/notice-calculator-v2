@@ -83,6 +83,36 @@ public class NoticeHandler extends DBHandler<Notices>{
         return notices;
     }
 
+    @Override
+    public List<Notices> getDatas(String key, String value) {
+        List<Notices> notices = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTICES + " WHERE " + key + " = '" + value + "' ORDER BY " + KEY_NOTICE_TIPE + " DESC";
+
+        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
+        // disk space scenarios)
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    notices.add(new Notices(
+                            cursor.getString(0),
+                            Double.parseDouble(cursor.getString(1)),
+                            Double.parseDouble(cursor.getString(2))
+                    ));
+                } while(cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("TAG", "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return notices;
+    }
+
     //GET 1 data
     @Override
     public Notices getData(String id) {

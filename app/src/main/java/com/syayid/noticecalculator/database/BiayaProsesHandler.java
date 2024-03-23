@@ -82,6 +82,37 @@ public class BiayaProsesHandler extends DBHandler<BiayaProses>{
         return biayaProsesPrices;
     }
 
+    @Override
+    // Get all posts in the database
+    public List<BiayaProses> getDatas(String key, String value) {
+        List<BiayaProses> biayaProsesPrices = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_BIAYA_PROSES + " WHERE " + key + " = '" + value + "' ORDER BY " + KEY_PROSES_WILAYAH + " ASC";
+
+        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
+        // disk space scenarios)
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    biayaProsesPrices.add(new BiayaProses(
+                            Integer.parseInt(cursor.getString(0)),
+                            cursor.getString(1),
+                            Double.parseDouble(cursor.getString(2))
+                    ));
+                } while(cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("TAG", "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return biayaProsesPrices;
+    }
+
     //GET 1 data
     @Override
     public BiayaProses getData(String id) {

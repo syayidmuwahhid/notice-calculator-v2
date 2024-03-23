@@ -11,9 +11,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.syayid.noticecalculator.database.ArsipDetailHandler;
+import com.syayid.noticecalculator.database.ArsipHandler;
+import com.syayid.noticecalculator.database.BiayaProsesHandler;
 import com.syayid.noticecalculator.database.DBHandler;
 import com.syayid.noticecalculator.database.NoticeHandler;
 import com.syayid.noticecalculator.database.UserHandler;
+import com.syayid.noticecalculator.models.BiayaProses;
+import com.syayid.noticecalculator.models.Notices;
 import com.syayid.noticecalculator.models.Users;
 
 import java.text.NumberFormat;
@@ -22,8 +27,6 @@ import java.util.Locale;
 public class GlobalData {
     public final static Locale locale = new Locale("id", "ID");
     public final static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
-
-    private static DBHandler userHandler, noticeHandler;
 
     public static String formatRp(double Rp) {
         formatter.setMaximumFractionDigits(0);
@@ -45,7 +48,7 @@ public class GlobalData {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String password = inputPassword.getText().toString().trim();
-                userHandler = UserHandler.getInstance(context);
+                DBHandler userHandler = UserHandler.getInstance(context);
                 Users pass = (Users) userHandler.getData("1");
                 if (password.equalsIgnoreCase(pass.getPassword())) {
                     aksi.run();
@@ -116,6 +119,79 @@ public class GlobalData {
         // Mengatur gaya teks (dalam contoh ini, menggunakan teks bold)
         tv.setTypeface(null, style);
         return tv;
+    }
+
+    public static void InitData(Context context) {
+        DBHandler noticeHandler = NoticeHandler.getInstance(context);
+        DBHandler userHandler = UserHandler.getInstance(context);
+        DBHandler biayaProsesHandler = BiayaProsesHandler.getInstance(context);
+        DBHandler arsipHandler = ArsipHandler.getInstance(context);
+        DBHandler arsipDetailHandler = ArsipDetailHandler.getInstance(context);
+
+        noticeHandler.empty();
+        userHandler.empty();
+        biayaProsesHandler.empty();
+        arsipHandler.empty();
+        arsipDetailHandler.empty();
+
+        //setup notice
+        final String[][] noticeList = {
+                { "A5C02R52S1", "0", "0"},
+                { "AFX12U21C08", "2375300", "76500" },
+                { "B5D02K29M2", "2560500", "79000" },
+                { "C1M02N41L1", "1848000", "0" },
+                { "C1M02N42L1", "1976300", "62500" },
+                { "F1C02N26L0", "2446500", "79000" },
+                { "G2E02R21L0", "2916800", "0" },
+                { "H1B02N41L0", "1976300", "62500" },
+                { "H1B02N42L0", "2047500", "65000" },
+                { "L1F02N36L1", "2218500", "71000" },
+                { "L1F02N37L1", "2318300", "74500" },
+                { "L1K02Q33L1", "2802800", "91500" },
+                { "M1K03Q33L0", "3515300", "0" },
+                { "N1N02Q33L1", "4056800", "0" },
+                { "N1N02Q43L1", "3729000", "124000" },
+                { "NF11T11C01", "1933500", "61000" },
+                { "P5E02R48M1", "4284800", "0" },
+                { "P5E02R49M1", "0", "0" },
+                { "R5F04R24", "0", "0" },
+                { "R5F04R25", "7106300", "0" },
+                { "T4G02T31L0", "4156500", "0" },
+                { "T5C02R37LO", "3116300", "0" },
+                { "V1J02Q32L1", "3743300", "124500" },
+                { "V1J02Q50L1", "3643500", "121000" },
+                { "X1H02N32M1", "2546300", "82500" },
+                { "Y3B02R17L0", "2916800", "0" },
+        };
+
+        for (String[] item : noticeList) {
+            Notices notice = new Notices();
+            notice.setTipe(item[0]);
+            notice.setHarga(Double.parseDouble(item[1]));
+            notice.setProgresif(Double.parseDouble(item[2]));
+            noticeHandler.add(notice);
+        }
+
+        //setup user
+        Users new_user = new Users();
+        new_user.setId(1);
+        new_user.setName("admin");
+        new_user.setPassword("123456");
+        new_user.setLevel(0);
+        userHandler.add(new_user);
+
+        //setup biaya proses
+        final String[][] biayaProsesList = {
+                {"KABUPATEN SUKABUMI", "1300000"},
+                {"KOTA SUKABUMI", "1340000"}
+        };
+
+        for (String[] item : biayaProsesList) {
+            BiayaProses biayaProses = new BiayaProses();
+            biayaProses.setWilayah(item[0]);
+            biayaProses.setHarga(Double.parseDouble(item[1]));
+            biayaProsesHandler.add(biayaProses);
+        }
     }
 
 //    public static void showDialogPassword(Context context, final DialogListener listener) {

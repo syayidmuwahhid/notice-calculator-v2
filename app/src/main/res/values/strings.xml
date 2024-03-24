@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notice Calculator V2</string>
+    <string name="app_name">Notice Calculator</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Notice Calculator v2.2024.03</string>
@@ -10,6 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_notice">Notice</string>
     <string name="menu_biaya_proses">Biaya Proses</string>
+    <string name="menu_ubah_password">Ubah Password</string>
 
     <string name="token">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9700</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.syayid.noticecalculator;
 
+import static com.syayid.noticecalculator.tools.GlobalData.InitData;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_notice, R.id.nav_biaya_proses)
+                R.id.nav_home, R.id.nav_notice, R.id.nav_biaya_proses, R.id.nav_ubah_password)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -54,16 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         DBHandler userHandler = UserHandler.getInstance(this);
         try {
-            Users user = (Users) userHandler.getData("1");
-        } catch (Exception e) {
-            if (e.getMessage().equalsIgnoreCase("Index 0 requested, with a size of 0")) {
-                Users new_user = new Users();
-                new_user.setId(1);
-                new_user.setName("admin");
-                new_user.setPassword("123456");
-                new_user.setLevel(0);
-                userHandler.add(new_user);
+            Users user = (Users) userHandler.getData("user", "admin");
+            if (user.getName() == null) {
+                InitData(this);
             }
+        } catch (Exception e) {
             Log.e("Get Data User", e.getMessage());
         }
     }

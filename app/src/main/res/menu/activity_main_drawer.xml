@@ -16,5 +16,10 @@
             android:id="@+id/nav_biaya_proses"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_biaya_proses" />
+
+        <item
+            android:id="@+id/nav_ubah_password"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_ubah_password" />
     </group>
 </menu>

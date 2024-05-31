@@ -1,5 +1,7 @@
 package com.syayid.noticecalculator;
 
+import static com.syayid.noticecalculator.tools.GlobalData.setTV;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -64,6 +67,7 @@ public class HitungNoticeActivity extends AppCompatActivity {
 
         spinnerList = new ArrayList<>();
         numberInputList = new ArrayList<>();
+        setHeader();
 
         addSpinnerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +101,7 @@ public class HitungNoticeActivity extends AppCompatActivity {
                         spinnerList = new ArrayList<>();
                         numberInputList = new ArrayList<>();
                         spinnerLayoutMaster.removeAllViews();
+                        setHeader();
                         addNewSpinner();
                     }
                 });
@@ -237,6 +242,24 @@ public class HitungNoticeActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+
+    }
+
+    private void setHeader() {
+        LinearLayout layout = new LinearLayout(context);
+
+        LinearLayout.LayoutParams layout1 = new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout1.weight = 0.7f;
+
+        LinearLayout.LayoutParams layout2 = new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout2.weight = 0.3f;
+
+        //Context context, String text, TableRow.LayoutParams params, int style, int size, int align
+        layout.addView(setTV(context, "Pilih Notice", layout1, Typeface.BOLD, 15, 0));
+        layout.addView(setTV(context, "Jumlah", layout2, Typeface.BOLD, 15, 0));
+        spinnerLayoutMaster.addView(layout);
 
     }
 }

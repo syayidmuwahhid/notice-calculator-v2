@@ -65,6 +65,9 @@ public class HasilNoticeActivity extends AppCompatActivity {
         jmlNotices = intent.getStringArrayListExtra("jmlNotices");
         lokasi = intent.getStringExtra("lokasi");
 
+        TextView titleWilayah = findViewById(R.id.title_wilayah);
+        titleWilayah.setText(lokasi);
+
         rupiahFormat = new DecimalFormat("#,###,###");
 
         if (getIntent().hasExtra("riwayat")) {

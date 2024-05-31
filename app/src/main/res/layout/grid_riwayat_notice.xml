@@ -15,12 +15,14 @@
         android:layout_marginBottom="3dp"
         android:text="Judul"
         android:textColor="@color/black"
+        android:paddingHorizontal="5dp"
         android:textStyle="bold"
         android:textSize="20sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="5dp"
         android:orientation="horizontal">
 
         <TextView

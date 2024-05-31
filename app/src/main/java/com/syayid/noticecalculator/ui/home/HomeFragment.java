@@ -18,9 +18,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.syayid.noticecalculator.HasilNoticeActivity;
+import com.syayid.noticecalculator.HitungGabunganActivity;
 import com.syayid.noticecalculator.HitungNoticeActivity;
+import com.syayid.noticecalculator.HitungProgresifActivity;
 import com.syayid.noticecalculator.R;
+import com.syayid.noticecalculator.RiwayatGabunganActivity;
 import com.syayid.noticecalculator.RiwayatNoticeActivity;
+import com.syayid.noticecalculator.RiwayatProgresifActivity;
 import com.syayid.noticecalculator.database.BiayaProsesHandler;
 import com.syayid.noticecalculator.database.DBHandler;
 import com.syayid.noticecalculator.database.UserHandler;
@@ -56,8 +60,10 @@ public class HomeFragment extends Fragment {
 
         Button btn_notice = binding.btnHitung;
         Button btn_progresif = binding.btnProgresif;
+        Button btn_gabungan = binding.btnGabungan;
         Button btn_riwayatNotice = binding.btnRiwayatNotice;
         Button btn_riwayatProgresif = binding.btnRiwayatProgresif;
+        Button btn_riwayatGabungan = binding.btnRiwayatGabungan;
 
         btn_notice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +90,48 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, RiwayatNoticeActivity.class));
+            }
+        });
+
+        btn_progresif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, HitungProgresifActivity.class));
+            }
+        });
+
+        btn_riwayatProgresif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, RiwayatProgresifActivity.class));
+            }
+        });
+
+        btn_gabungan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Pilih Wilayah")
+                        .setSingleChoiceItems(wilayahList.toArray(new String[0]), -1, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Tangani pemilihan opsi
+                                String selectedWilayah = wilayahList.get(which);
+                                Intent intent = new Intent(context, HitungGabunganActivity.class);
+                                intent.putExtra("wilayah", selectedWilayah);
+                                startActivity(intent);
+                                Toast.makeText(context, "Wilayah dipilih: " + selectedWilayah, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
+            }
+        });
+
+        btn_riwayatGabungan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, RiwayatGabunganActivity.class));
             }
         });
 

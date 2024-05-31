@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GabunganActivity">
+    android:orientation="vertical"
+    tools:context=".HitungGabunganActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/container">
+
+            <TextView
+                android:id="@+id/wilayah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:layout_marginTop="16dp"
+                android:text="WIlayah"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"/>
+
+
+            <LinearLayout
+                android:id="@+id/spinnerLayoutmaster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10px"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addSpinnerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:text="Tambah Notice"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/primary"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/resetButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="10px"
+                    android:text="Reset"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/secondary"/>
+
+                <Button
+                    android:id="@+id/submitButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="10px"
+                    android:backgroundTint="@color/green_primary"
+                    android:text="Hitung"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

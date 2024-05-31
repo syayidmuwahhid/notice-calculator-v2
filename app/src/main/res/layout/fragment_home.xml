@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="8dp"
         android:text="NOTICE CALCULATOR"
         android:textAlignment="center"
@@ -19,7 +19,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,12 +27,12 @@
         android:id="@+id/btn_hitung"
         android:layout_width="250dp"
         android:layout_height="52dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="72dp"
+        android:backgroundTint="@color/green_primary"
         android:text="Hitung Notice"
         android:textColor="@color/black"
-        android:backgroundTint="@color/green_primary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
@@ -44,10 +44,66 @@
         android:text="Hitung Progresif"
         android:textColor="@color/black"
         android:backgroundTint="@color/green_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_hitung"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <Button
+        android:id="@+id/btn_gabungan"
+        android:layout_width="250dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:text="Hitung Gabungan"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/green_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_progresif"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <Button
+        android:id="@+id/btn_riwayat_notice"
+        android:layout_width="250dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:text="Riwayat Notice"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gabungan"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <Button
+        android:id="@+id/btn_riwayat_progresif"
+        android:layout_width="250dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:text="Riwayat Progresif"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_riwayat_notice"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <Button
+        android:id="@+id/btn_riwayat_gabungan"
+        android:layout_width="250dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:text="Riwayat Gabungan"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_riwayat_progresif"
         app:layout_constraintVertical_bias="0.004" />
 </androidx.constraintlayout.widget.ConstraintLayout>

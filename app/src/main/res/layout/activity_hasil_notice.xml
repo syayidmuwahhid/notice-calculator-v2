@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".HasilNoticeActivity">
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_wilayah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="NOTICE CALCULATOR"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +40,7 @@
                     android:layout_margin="10px"
                     android:layout_weight="2"
                     android:textAlignment="center"
-                    android:text="Type"
+                    android:text="Tipe"
                     android:textStyle="bold" />
 
 
@@ -61,17 +72,18 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
         </LinearLayout>
-    </ScrollView>
 
-    <Button
-        android:id="@+id/btnArsip"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Arsipkan"
-        android:layout_margin="30dp"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/green_primary"
-        android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/btnArsip"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Arsipkan"
+            android:layout_margin="30dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/green_primary"
+            android:textColor="@color/black"/>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

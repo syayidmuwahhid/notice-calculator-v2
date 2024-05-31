@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputType;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,6 +93,36 @@ public class GlobalData {
     }
 
     public static TextView setTV(Context context, String text, TableRow.LayoutParams params, int style, int size, int align) {
+        TextView tv = new TextView(context);
+        tv.setText(text);
+
+        // Menetapkan parameter pada TextView
+        if (params == null) {
+            // Menetapkan parameter default jika params bernilai null
+            params = new TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT
+            );
+
+        }
+        // Mengatur margin pada TextView (dalam contoh ini, margin kiri sebesar 10dp)
+        params.setMargins(15, 10, 15, 10); // left, top, right, bottom
+
+        if (align != 0) {
+            tv.setGravity(align);
+        }
+
+        tv.setLayoutParams(params);
+
+        // Mengatur ukuran teks (dalam contoh ini, ukuran teks 20sp)
+        tv.setTextSize(size);
+
+        // Mengatur gaya teks (dalam contoh ini, menggunakan teks bold)
+        tv.setTypeface(null, style);
+        return tv;
+    }
+
+    public static TextView setTV(Context context, String text, LinearLayout.LayoutParams params, int style, int size, int align) {
         TextView tv = new TextView(context);
         tv.setText(text);
 
